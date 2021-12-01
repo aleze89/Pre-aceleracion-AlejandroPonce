@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ChallengeDisney.Migrations
 {
-    public partial class CreateDisneyDB : Migration
+    public partial class ModifEntidDisneyDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace ChallengeDisney.Migrations
                 {
                     CharacterId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CharacterImage = table.Column<byte>(type: "tinyint", nullable: false),
+                    Image = table.Column<byte>(type: "tinyint", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Age = table.Column<int>(type: "int", nullable: false),
                     Weight = table.Column<float>(type: "real", nullable: false),
@@ -30,8 +30,8 @@ namespace ChallengeDisney.Migrations
                 {
                     GenreId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    GenreName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GenreImage = table.Column<byte>(type: "tinyint", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image = table.Column<byte>(type: "tinyint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -39,22 +39,22 @@ namespace ChallengeDisney.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Films",
+                name: "Movies",
                 columns: table => new
                 {
-                    FilmId = table.Column<int>(type: "int", nullable: false)
+                    MovieId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FilmImage = table.Column<byte>(type: "tinyint", nullable: false),
+                    Image = table.Column<byte>(type: "tinyint", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Raring = table.Column<int>(type: "int", nullable: false),
+                    Rating = table.Column<int>(type: "int", nullable: false),
                     GenreId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Films", x => x.FilmId);
+                    table.PrimaryKey("PK_Movies", x => x.MovieId);
                     table.ForeignKey(
-                        name: "FK_Films_Genres_GenreId",
+                        name: "FK_Movies_Genres_GenreId",
                         column: x => x.GenreId,
                         principalTable: "Genres",
                         principalColumn: "GenreId",
@@ -62,50 +62,50 @@ namespace ChallengeDisney.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CharacterFilm",
+                name: "CharacterMovie",
                 columns: table => new
                 {
                     CharactersCharacterId = table.Column<int>(type: "int", nullable: false),
-                    FilmsFilmId = table.Column<int>(type: "int", nullable: false)
+                    MoviesMovieId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CharacterFilm", x => new { x.CharactersCharacterId, x.FilmsFilmId });
+                    table.PrimaryKey("PK_CharacterMovie", x => new { x.CharactersCharacterId, x.MoviesMovieId });
                     table.ForeignKey(
-                        name: "FK_CharacterFilm_Characters_CharactersCharacterId",
+                        name: "FK_CharacterMovie_Characters_CharactersCharacterId",
                         column: x => x.CharactersCharacterId,
                         principalTable: "Characters",
                         principalColumn: "CharacterId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CharacterFilm_Films_FilmsFilmId",
-                        column: x => x.FilmsFilmId,
-                        principalTable: "Films",
-                        principalColumn: "FilmId",
+                        name: "FK_CharacterMovie_Movies_MoviesMovieId",
+                        column: x => x.MoviesMovieId,
+                        principalTable: "Movies",
+                        principalColumn: "MovieId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CharacterFilm_FilmsFilmId",
-                table: "CharacterFilm",
-                column: "FilmsFilmId");
+                name: "IX_CharacterMovie_MoviesMovieId",
+                table: "CharacterMovie",
+                column: "MoviesMovieId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Films_GenreId",
-                table: "Films",
+                name: "IX_Movies_GenreId",
+                table: "Movies",
                 column: "GenreId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CharacterFilm");
+                name: "CharacterMovie");
 
             migrationBuilder.DropTable(
                 name: "Characters");
 
             migrationBuilder.DropTable(
-                name: "Films");
+                name: "Movies");
 
             migrationBuilder.DropTable(
                 name: "Genres");

@@ -9,7 +9,7 @@ namespace ChallengeDisney.Context
     public class DisneyContext : DbContext
     {
         public DbSet<Models.Character> Characters { get; set; }
-        public DbSet<Models.Film> Films { get; set; }
+        public DbSet<Models.Movie> Movies { get; set; }
         public DbSet<Models.Genre> Genres { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

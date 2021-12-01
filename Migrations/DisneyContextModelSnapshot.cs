@@ -29,11 +29,11 @@ namespace ChallengeDisney.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<byte>("CharacterImage")
-                        .HasColumnType("tinyint");
-
                     b.Property<string>("History")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("Image")
+                        .HasColumnType("tinyint");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -46,35 +46,6 @@ namespace ChallengeDisney.Migrations
                     b.ToTable("Characters");
                 });
 
-            modelBuilder.Entity("ChallengeDisney.Models.Film", b =>
-                {
-                    b.Property<int>("FilmId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<byte>("FilmImage")
-                        .HasColumnType("tinyint");
-
-                    b.Property<int?>("GenreId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Raring")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("FilmId");
-
-                    b.HasIndex("GenreId");
-
-                    b.ToTable("Films");
-                });
-
             modelBuilder.Entity("ChallengeDisney.Models.Genre", b =>
                 {
                     b.Property<int>("GenreId")
@@ -82,10 +53,10 @@ namespace ChallengeDisney.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<byte>("GenreImage")
+                    b.Property<byte>("Image")
                         .HasColumnType("tinyint");
 
-                    b.Property<string>("GenreName")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("GenreId");
@@ -93,31 +64,60 @@ namespace ChallengeDisney.Migrations
                     b.ToTable("Genres");
                 });
 
-            modelBuilder.Entity("CharacterFilm", b =>
+            modelBuilder.Entity("ChallengeDisney.Models.Movie", b =>
+                {
+                    b.Property<int>("MovieId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("GenreId")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("Image")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MovieId");
+
+                    b.HasIndex("GenreId");
+
+                    b.ToTable("Movies");
+                });
+
+            modelBuilder.Entity("CharacterMovie", b =>
                 {
                     b.Property<int>("CharactersCharacterId")
                         .HasColumnType("int");
 
-                    b.Property<int>("FilmsFilmId")
+                    b.Property<int>("MoviesMovieId")
                         .HasColumnType("int");
 
-                    b.HasKey("CharactersCharacterId", "FilmsFilmId");
+                    b.HasKey("CharactersCharacterId", "MoviesMovieId");
 
-                    b.HasIndex("FilmsFilmId");
+                    b.HasIndex("MoviesMovieId");
 
-                    b.ToTable("CharacterFilm");
+                    b.ToTable("CharacterMovie");
                 });
 
-            modelBuilder.Entity("ChallengeDisney.Models.Film", b =>
+            modelBuilder.Entity("ChallengeDisney.Models.Movie", b =>
                 {
                     b.HasOne("ChallengeDisney.Models.Genre", "Genre")
-                        .WithMany("Films")
+                        .WithMany("Movies")
                         .HasForeignKey("GenreId");
 
                     b.Navigation("Genre");
                 });
 
-            modelBuilder.Entity("CharacterFilm", b =>
+            modelBuilder.Entity("CharacterMovie", b =>
                 {
                     b.HasOne("ChallengeDisney.Models.Character", null)
                         .WithMany()
@@ -125,16 +125,16 @@ namespace ChallengeDisney.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ChallengeDisney.Models.Film", null)
+                    b.HasOne("ChallengeDisney.Models.Movie", null)
                         .WithMany()
-                        .HasForeignKey("FilmsFilmId")
+                        .HasForeignKey("MoviesMovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("ChallengeDisney.Models.Genre", b =>
                 {
-                    b.Navigation("Films");
+                    b.Navigation("Movies");
                 });
 #pragma warning restore 612, 618
         }

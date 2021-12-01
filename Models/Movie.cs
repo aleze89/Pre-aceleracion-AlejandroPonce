@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace ChallengeDisney.Models
 {
-    public class Film
+    public class Movie
     {
-        public int FilmId { get; set; }
-        public byte FilmImage { get; set; }
+        public int MovieId { get; set; }
+        public byte Image { get; set; }
         public string Title { get; set; }
         public DateTime CreationDate { get; set; }
-        public int Raring { get; set; }
+        public int Rating { get; set; }
         public Genre Genre { get; set; }
         public ICollection<Character> Characters { get; set; }
 
