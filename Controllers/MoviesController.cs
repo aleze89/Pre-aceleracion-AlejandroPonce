@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ChallengeDisney.Context;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,16 @@ namespace ChallengeDisney.Controllers
     [ApiController]
     public class MoviesController : ControllerBase
     {
+        private readonly DisneyContext _context;
+        public MoviesController(DisneyContext ctx)
+        {
+            _context = ctx;
+        }
         // GET: api/<MoviesController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> Get(byte Image, string Title, DateTime CreationDate)
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { Image, Title, CreationDate };
         }
 
         // GET api/<MoviesController>/5

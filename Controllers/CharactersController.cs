@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ChallengeDisney.Context;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,11 @@ namespace ChallengeDisney.Controllers
     [ApiController]
     public class CharactersController : ControllerBase
     {
+        private readonly DisneyContext _context;
+        public CharactersController(DisneyContext ctx)
+        {
+            _context = ctx;
+        }
         // GET: api/<CharactersController>
         [HttpGet]
         public IEnumerable<string> Get(string Image, string Name)
