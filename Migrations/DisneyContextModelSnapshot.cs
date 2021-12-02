@@ -32,8 +32,8 @@ namespace ChallengeDisney.Migrations
                     b.Property<string>("History")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte>("Image")
-                        .HasColumnType("tinyint");
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");

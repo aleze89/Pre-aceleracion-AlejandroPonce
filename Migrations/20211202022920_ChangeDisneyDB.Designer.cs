@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ChallengeDisney.Migrations
 {
     [DbContext(typeof(DisneyContext))]
-    [Migration("20211201035443_ModifEntidDisneyDB")]
-    partial class ModifEntidDisneyDB
+    [Migration("20211202022920_ChangeDisneyDB")]
+    partial class ChangeDisneyDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,8 +34,8 @@ namespace ChallengeDisney.Migrations
                     b.Property<string>("History")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte>("Image")
-                        .HasColumnType("tinyint");
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");

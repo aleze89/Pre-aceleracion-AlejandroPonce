@@ -14,9 +14,9 @@ namespace ChallengeDisney.Controllers
     {
         // GET: api/<CharactersController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> Get(string Image, string Name)
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { Image , Name };
         }
 
         // GET api/<CharactersController>/5

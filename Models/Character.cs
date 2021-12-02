@@ -8,7 +8,7 @@ namespace ChallengeDisney.Models
     public class Character
     {
         public int CharacterId { get; set; }
-        public byte Image { get; set; }
+        public string Image { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
         public float Weight { get; set; }
