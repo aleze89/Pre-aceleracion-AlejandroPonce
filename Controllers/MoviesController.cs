@@ -14,15 +14,15 @@ namespace ChallengeDisney.Controllers
     public class MoviesController : ControllerBase
     {
         private readonly DisneyContext _context;
-        public MoviesController(DisneyContext ctx)
+        public MoviesController(DisneyContext context)
         {
-            _context = ctx;
+            _context = context;
         }
         // GET: api/<MoviesController>
         [HttpGet]
-        public IEnumerable<string> Get(byte Image, string Title, DateTime CreationDate)
+        public IActionResult Get(byte Image, string Title, DateTime CreationDate)
         {
-            return new string[] { Image, Title, CreationDate };
+            return Ok();
         }
 
         // GET api/<MoviesController>/5

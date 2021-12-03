@@ -1,4 +1,6 @@
 ﻿using ChallengeDisney.Context;
+using ChallengeDisney.Models;
+using DocumentFormat.OpenXml.ExtendedProperties;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,15 +16,15 @@ namespace ChallengeDisney.Controllers
     public class CharactersController : ControllerBase
     {
         private readonly DisneyContext _context;
-        public CharactersController(DisneyContext ctx)
+        public CharactersController(DisneyContext context)
         {
-            _context = ctx;
+            _context = context;
         }
         // GET: api/<CharactersController>
         [HttpGet]
         public IEnumerable<string> Get(string Image, string Name)
         {
-            return new string[] { Image , Name };
+            return new string[] { Image, Name };
         }
 
         // GET api/<CharactersController>/5
@@ -34,15 +36,24 @@ namespace ChallengeDisney.Controllers
 
         // POST api/<CharactersController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post(Character character)
         {
+            _context.Characters.Add(character);
+            _context.SaveChanges();
+            return Ok(_context.Characters.ToList());
         }
 
         // PUT api/<CharactersController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+
+        public IActionResult Put(Character character)
         {
+            if (_context.Characters.FirstOrDefault(x => x.CharacterId == character.CharacterId) == null) return BadRequest("El Personaje enviado no existe.");
+            _context.Characters.Add(character);
+            _context.SaveChanges();
+            return Ok(_context.Characters.ToList());
         }
+
 
         // DELETE api/<CharactersController>/5
         [HttpDelete("{id}")]
