@@ -13,7 +13,7 @@ namespace ChallengeDisney.Context
         public DbSet<Models.Genre> Genres { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-UJVMHBA\MSQLSERVER;Database=DisneyDB;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-UJVMHBA\MSQLSERVER;Database=DisneyDB;Trusted_Connection=True");
         }
 
     }
