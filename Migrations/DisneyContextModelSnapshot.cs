@@ -19,7 +19,7 @@ namespace ChallengeDisney.Migrations
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ChallengeDisney.Models.Character", b =>
+            modelBuilder.Entity("ChallengeDisney.Entities.Character", b =>
                 {
                     b.Property<int>("CharacterId")
                         .ValueGeneratedOnAdd()
@@ -46,7 +46,7 @@ namespace ChallengeDisney.Migrations
                     b.ToTable("Characters");
                 });
 
-            modelBuilder.Entity("ChallengeDisney.Models.Genre", b =>
+            modelBuilder.Entity("ChallengeDisney.Entities.Genre", b =>
                 {
                     b.Property<int>("GenreId")
                         .ValueGeneratedOnAdd()
@@ -64,7 +64,7 @@ namespace ChallengeDisney.Migrations
                     b.ToTable("Genres");
                 });
 
-            modelBuilder.Entity("ChallengeDisney.Models.Movie", b =>
+            modelBuilder.Entity("ChallengeDisney.Entities.Movie", b =>
                 {
                     b.Property<int>("MovieId")
                         .ValueGeneratedOnAdd()
@@ -108,9 +108,9 @@ namespace ChallengeDisney.Migrations
                     b.ToTable("CharacterMovie");
                 });
 
-            modelBuilder.Entity("ChallengeDisney.Models.Movie", b =>
+            modelBuilder.Entity("ChallengeDisney.Entities.Movie", b =>
                 {
-                    b.HasOne("ChallengeDisney.Models.Genre", "Genre")
+                    b.HasOne("ChallengeDisney.Entities.Genre", "Genre")
                         .WithMany("Movies")
                         .HasForeignKey("GenreId");
 
@@ -119,20 +119,20 @@ namespace ChallengeDisney.Migrations
 
             modelBuilder.Entity("CharacterMovie", b =>
                 {
-                    b.HasOne("ChallengeDisney.Models.Character", null)
+                    b.HasOne("ChallengeDisney.Entities.Character", null)
                         .WithMany()
                         .HasForeignKey("CharactersCharacterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ChallengeDisney.Models.Movie", null)
+                    b.HasOne("ChallengeDisney.Entities.Movie", null)
                         .WithMany()
                         .HasForeignKey("MoviesMovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ChallengeDisney.Models.Genre", b =>
+            modelBuilder.Entity("ChallengeDisney.Entities.Genre", b =>
                 {
                     b.Navigation("Movies");
                 });

@@ -1,5 +1,5 @@
 ﻿using ChallengeDisney.Context;
-using ChallengeDisney.Models;
+using ChallengeDisney.Entities;
 using DocumentFormat.OpenXml.ExtendedProperties;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,7 +24,7 @@ namespace ChallengeDisney.Controllers
         [HttpGet]
         public IEnumerable<string> Get(string Image, string Name)
         {
-            return new string[] { Image, Name };
+            return new string[] {Image, Name};
         }
 
         // GET api/<CharactersController>/5

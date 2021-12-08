@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
-namespace ChallengeDisney.Models
+namespace ChallengeDisney.Entities
 {
     public class User : IdentityUser
     {
